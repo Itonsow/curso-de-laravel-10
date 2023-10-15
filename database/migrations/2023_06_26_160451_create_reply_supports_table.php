@@ -11,20 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('replies_support', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->uuid('user_id')->index();
-            $table->uuid('support_id')->index();
-            $table->text('content');
+        Schema::create('supports', function (Blueprint $table) {
+            $table->id();
+            $table->string('subject');
+            $table->enum('status', ['a', 'p', 'c']);
+            $table->text('body');
             $table->timestamps();
-
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users');
-
-            $table->foreign('support_id')
-                ->references('id')
-                ->on('supports');
         });
     }
 
